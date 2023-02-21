@@ -1,0 +1,154 @@
+{
+  "tests": [
+    {
+      "name": "Test Cases Not Changed ",
+      "setup": "git fetch --unshallow --update-head-ok origin '+refs/heads/*:refs/heads/*'",
+      "run": "[ -z \"$(git log feedback..main ./test/*)\" ]",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 0
+    },
+    {
+      "name": "Activity 1 clearLow ",
+      "setup": "",
+      "run": "gradle test --tests Activity1Test.testClearLow",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "Activity 1  testClearLow ",
+      "setup": "",
+      "run": "gradle test --tests Activity1Test.testTestClearLow1of2 --tests Activity1Test.testTestClearLow2of2",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Activity 1 setLow ",
+      "setup": "",
+      "run": "gradle test --tests Activity1Test.testSetLow1of3 --tests Activity1Test.testSetLow2of3 --tests Activity1Test.testSetLow3of3",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "Activity 1 testSetLow ",
+      "setup": "",
+      "run": "gradle test --tests Activity1Test.testTestSetLow1of2 --tests Activity1Test.testTestSetLow2of2",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Activity 1 revealPicture ",
+      "setup": "",
+      "run": "gradle test --tests Activity1Test.testRevealPicture1of2 --tests Activity1Test.testRevealPicture2of2",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "Activity 2 canHide 2 params",
+      "setup": "",
+      "run": "gradle test --tests Activity2Test.testCanHide1of2 --tests Activity2Test.testCanHide2of2",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Activity 2  hidePicture 2 params",
+      "setup": "",
+      "run": "gradle test --tests Activity2Test.testHidePicture1of10 --tests Activity2Test.testHidePicture2of10 --tests Activity2Test.testHidePicture3of10 --tests Activity2Test.testHidePicture4of10 --tests Activity2Test.testHidePicture5of10 --tests Activity2Test.testHidePicture6of10 --tests Activity2Test.testHidePicture7of10 --tests Activity2Test.testHidePicture8of10 --tests Activity2Test.testHidePicture9of10 --tests Activity2Test.testHidePicture10of10",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "Activity 3 canHide 4 params",
+      "setup": "",
+      "run": "gradle test --tests Activity3Test.testCanHide1of5 --tests Activity3Test.testCanHide1of5 --tests Activity3Test.testCanHide2of5 --tests Activity3Test.testCanHide3of5 --tests Activity3Test.testCanHide4of5 --tests Activity3Test.testCanHide5of5",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Activity 3 hidePicture 4 params",
+      "setup": "",
+      "run": "gradle test --tests Activity3Test.testHidePicture1of19 --tests Activity3Test.testHidePicture2of19 --tests Activity3Test.testHidePicture3of19 --tests Activity3Test.testHidePicture4of19 --tests Activity3Test.testHidePicture5of19 --tests Activity3Test.testHidePicture6of19 --tests Activity3Test.testHidePicture7of19 --tests Activity3Test.testHidePicture8of19 --tests Activity3Test.testHidePicture9of19 --tests Activity3Test.testHidePicture10of19",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "Activity 3 isSame ",
+      "setup": "",
+      "run": "gradle test --tests Activity3Test.testIsSame1of3 --tests Activity3Test.testIsSame2of3 --tests Activity3Test.testIsSame3of3",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "Activity 3 findDifferences ",
+      "setup": "",
+      "run": "gradle test --tests Activity3Test.testFindDifferences1of3 --tests Activity3Test.testFindDifferences2of3 --tests Activity3Test.testFindDifferences3of3",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "Activity 3  showDifferentArea ",
+      "setup": "",
+      "run": "gradle test --tests Activity3Test.testShowDifferentArea1of7 --tests Activity3Test.testShowDifferentArea2of7 --tests Activity3Test.testShowDifferentArea3of7 --tests Activity3Test.testShowDifferentArea4of7 --tests Activity3Test.testShowDifferentArea5of7 --tests Activity3Test.testShowDifferentArea6of7 --tests Activity3Test.testShowDifferentArea7of7",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "Activity 4 hideText ",
+      "setup": "",
+      "run": "gradle test --tests Activity4Test.testHideText1of5 --tests Activity4Test.testHideText2of5 --tests Activity4Test.testHideText3of5 --tests Activity4Test.testHideText4of5 --tests Activity4Test.testHideText5of5",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "Activity 4  revealText",
+      "setup": "",
+      "run": "gradle test --tests Activity4Test.testRevealText1of3 --tests Activity4Test.testRevealText2of3 --tests Activity4Test.testRevealText3of3",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    }
+  ]
+}
