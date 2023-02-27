@@ -150,13 +150,23 @@ public class Steganography {
 		// TODO (1.13): traverse pixels using a nested for loop
 		/** not yet implemented **/
 		
-		for (int i = 0; i<pixels.length; i++) {
-			for(int j = 0; j <pixels[0].length; j++) {
-				int r = pixels[i][j].getRed();
-				int g = pixels[i][j].getGreen();
-				int b = pixels[i][j].getBlue();
+		for (int i = 0; i<source.length; i++) {
+			for(int j = 0; j <source[0].length; j++) {
 				
+				Color col = source[i][j].getColor();
 				
+				int r = source[i][j].getRed();
+				int g = source[i][j].getGreen();
+				int b = source[i][j].getBlue();
+				
+				r = r % 4 *64;
+				g = g % 4 *64;
+				b = b % 4 *64;	
+				
+				pixels[i][j].setRed(r);
+				pixels[i][j].setRed(g);
+				pixels[i][j].setRed(b);
+				 
 			}
 		}
 
