@@ -84,6 +84,7 @@ public class Steganography {
 	public static void setLow(Pixel p, Color c) {
 		// clear the lowest 2 bits of the pixel
 		clearLow(p);
+		
 		// extract the red, green, and blue values from the color
 		int r = c.getRed();
 		int g = c.getGreen();
@@ -91,15 +92,17 @@ public class Steganography {
 		// TODO (1.10): get the highest two bits of the color using maths!
 		/** not yet implemented **/
 		// to get the highest two bits, divide by 64.
-		r = r/64;
-		g = g/64;
-		b = b/64;
+		int rnew = r/64;
+		int gnew = g/64;
+		int bnew = b/64;
 
 		// TODO (1.11): set the RGB components of the pixel to new values
 		/** not yet implemented **/
 		// to set a color component (RGB), add the cleared value to 
 		// highest 2 bits of c
-		
+		p.setRed(rnew);
+		p.setGreen(gnew);
+		p.setBlue(bnew);
 		
 	}
 
@@ -118,7 +121,9 @@ public class Steganography {
 		Pixel[] pixels = copy.getPixels();
 		// TODO (1.12): use a for each loop to set the low bits of each pixel
 		/** not yet implemented **/
-
+		for(int i =0; i <pixels.length; i++) {
+			setLow(pixels[i], c);
+		}
 
 
 		// return the copy
@@ -144,7 +149,16 @@ public class Steganography {
 		Pixel[][] source = hidden.getPixels2D();
 		// TODO (1.13): traverse pixels using a nested for loop
 		/** not yet implemented **/
-
+		
+		for (int i = 0; i<pixels.length; i++) {
+			for(int j = 0; j <pixels[0].length; j++) {
+				int r = pixels[i][j].getRed();
+				int g = pixels[i][j].getGreen();
+				int b = pixels[i][j].getBlue();
+				
+				
+			}
+		}
 
 		// TODO (1.14): set red, green, and blue values of each 
 		//              pixel to the lowest two bits in source
@@ -722,3 +736,9 @@ public class Steganography {
         else {
             System.out.println("Something went wrong.");
         }
+		 */
+
+		////////////////////////////////////////////////////
+	}
+
+}
