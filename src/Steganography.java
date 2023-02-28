@@ -266,9 +266,15 @@ public class Steganography {
 	public static boolean canHide(Picture source, Picture secret, int row, int col) {
 		// TODO (3.0): determine whether secret can be hidden in source at [row][col]
 		/** not yet implemented **/
+		Picture hidden = new Picture(source);
+		Pixel[][] hPixels = hidden.getPixels2D();
+		Pixel[][] sPixels = secret.getPixels2D();
 		
-		for(int i = ; i < )
-		return false;
+		Pixel pix = hPixels[row][col];
+		
+		
+		
+		
 	}
 
 	// Exercise 3.1
