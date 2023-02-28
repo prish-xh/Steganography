@@ -155,17 +155,9 @@ public class Steganography {
 				
 				Color col = source[i][j].getColor();
 				
-				int r = source[i][j].getRed();
-				int g = source[i][j].getGreen();
-				int b = source[i][j].getBlue();
-				
-				r = r % 4 *64;
-				g = g % 4 *64;
-				b = b % 4 *64;	
-				
-				pixels[i][j].setRed(r);
-				pixels[i][j].setRed(g);
-				pixels[i][j].setRed(b);
+				pixels[i][j].setRed(pixels[i][j].getRed() % 64+ col.getRed() % 4 * 64);
+				pixels[i][j].setBlue(pixels[i][j].getBlue()% 64 + col.getBlue() % 4* 64);
+				pixels[i][j].setGreen(pixels[i][j].getGreen()% 64 + col.getGreen() % 4 * 64);
 				 
 			}
 		}
@@ -203,7 +195,12 @@ public class Steganography {
 	public static boolean canHide(Picture source, Picture secret) {
 		// TODO (2.8): determine whether secret can be hidden in source
 		/** not yet implemented **/
-		return false;
+		if (source.getHeight() == secret.getHeight()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	// Exercise 2.9
@@ -227,6 +224,15 @@ public class Steganography {
 		// Traverse hPixels
 		// Get the corresponding pixel from sPixels
 
+		for (int i = 0; i< hPixels.length; i++) {
+			for (int j = 0; j < hPixels.length; j++) {
+				Color col = sPixels[i][j].getColor();
+				setLow(hPixels[i][j], col);
+			}
+		}
+		
+		
+
 		// call setLow on hPixels, using the color from 
 		// the pixel in sPixels
 
@@ -234,7 +240,7 @@ public class Steganography {
 		// return hidden. Since the pixels that you modified are referenced from 
 		// the hidden, hidden contains the hidden secret picture.
 
-		return null;
+		return hidden;
 	}
 
 	////////////////////////////////////////////////////////////////////
@@ -612,7 +618,6 @@ public class Steganography {
         Picture copy1dot12 = testSetLow(beach1dot12, eastlakeRed);
         copy1dot12.setTitle("Activity 1 - Part B: Beach after testSetLow");
         copy1dot12.explore();
-
         // Part C
         Picture copy1dot14 = revealPicture(copy1dot12);
         copy1dot14.setTitle("1.14 revealPicture");
@@ -627,7 +632,6 @@ public class Steganography {
         Picture beach2dot8 = new Picture("beach.jpg");
         Picture arch2dot8 = new Picture("arch.jpg");
         System.out.println("beach same size as arch? " + canHide(beach2dot8, arch2dot8));
-
         // Part B - Test hidePicture
         Picture swan2dot9 = new Picture("swan.jpg");
         Picture gorge2dot9 = new Picture("gorge.jpg");
@@ -642,7 +646,6 @@ public class Steganography {
             combined2dot9.setTitle("ACTIVITY 2 - Part C Gorge hidden in Swan");
             combined2dot9.explore();
         }
-
         // Part C - Verify revealPicture still works
         if (combined2dot9 != null) {
             Picture revealed2dot11 = revealPicture(combined2dot9);
@@ -671,7 +674,6 @@ public class Steganography {
             unhidden.setTitle("ACTIVITY 3 - Part A - Beach with Revealed Pictures");
             unhidden.explore();
         }
-
         // Part B
         Picture swanCopy1 = new Picture("swan.jpg");
         Picture swanCopy2 = new Picture("swan.jpg");
@@ -680,7 +682,6 @@ public class Steganography {
         swanCopy2 = testClearLow(swanCopy2);
         System.out.print("Swans are the same after clearLow on swan2? ");
         System.out.println(isSame(swanCopy1, swanCopy2));
-
         // Part C
         Picture archCopy1 = new Picture("arch.jpg");
         Picture archCopy2 = new Picture("arch.jpg");
@@ -704,7 +705,6 @@ public class Steganography {
         Picture revealed3dot3 = revealPicture(archCopy2);
         revealed3dot3.setTitle("ACTIVITY 3 - Part C - Revealed Hidden Picture");
         revealed3dot3.explore();
-
         // Part D
         Picture templeCopy1 = new Picture("femaleLionAndHall.jpg");
         Picture robot3dot4 = new Picture("robot.jpg");
@@ -726,7 +726,6 @@ public class Steganography {
             unhidden.setTitle("ACTIVITY 3 - Part D - Temple with Hidden Pictures");
             unhidden.explore();
         }
-
 		 */
 		////////////////////////////////////////////////////
 		// ACTIVITY 4: Hiding and Revealing a Text Message
