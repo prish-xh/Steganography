@@ -95,14 +95,17 @@ public class Steganography {
 		int rnew = r/64;
 		int gnew = g/64;
 		int bnew = b/64;
-
+		
+		int pr = p.getRed();
+		int pg = p.getGreen();
+		int pb = p.getBlue();
 		// TODO (1.11): set the RGB components of the pixel to new values
 		/** not yet implemented **/
 		// to set a color component (RGB), add the cleared value to 
 		// highest 2 bits of c
-		p.setRed(rnew);
-		p.setGreen(gnew);
-		p.setBlue(bnew);
+		p.setRed(rnew + pr);
+		p.setGreen(gnew + pg);
+		p.setBlue(bnew +pb);
 		
 	}
 
@@ -225,9 +228,8 @@ public class Steganography {
 		// Get the corresponding pixel from sPixels
 
 		for (int i = 0; i< hPixels.length; i++) {
-			for (int j = 0; j < hPixels.length; j++) {
-				Color col = sPixels[i][j].getColor();
-				setLow(hPixels[i][j], col);
+			for (int j = 0; j < hPixels[i].length; j++) {
+				setLow(hPixels[i][j], sPixels[i][j].getColor());
 			}
 		}
 		
@@ -264,6 +266,8 @@ public class Steganography {
 	public static boolean canHide(Picture source, Picture secret, int row, int col) {
 		// TODO (3.0): determine whether secret can be hidden in source at [row][col]
 		/** not yet implemented **/
+		
+		for(int i = ; i < )
 		return false;
 	}
 
