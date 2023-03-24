@@ -270,7 +270,13 @@ public class Steganography {
 		Pixel[][] hPixels = hidden.getPixels2D();
 		Pixel[][] sPixels = secret.getPixels2D();
 		
-		Pixel pix = hPixels[row][col];
+		for(int i = 0; i<hPixels.length; i++) {
+			for (int j = 0; j < hPixels[0].length; i++) {
+				
+				if(sPixels[i][j] <= hPixels[row][col]);
+			}
+		}
+		
 		
 		
 		
@@ -296,15 +302,25 @@ public class Steganography {
 		// TODO (3.1): hide a secret picture within a source picture at [row][col]
 		/** not yet implemented **/
 
+		Picture hidden = new Picture(source);
+		Pixel[][] hPixels = hidden.getPixels2D();
+		Pixel[][] sPixels = secret.getPixels2D();
+		
+		int rowC = 0;
+		int colC = 0;
+		int sRow = 0;
+		int sCol = 0;
+		
+		for(int curRow = row; curRow < row + sPixels.length; curRow++) {
+			for(int curCol = col; curCol < col + sPixels[0].length; curCol++) {
+				setLow(hPixels[curRow][curCol], sPixels[sRow][sCol].getColor());
+				sCol++;
+			}
+			sCol = 0;
+			sRow++;
+		}
 
-
-
-
-
-
-
-
-		return null;
+		return hidden;
 	}
 
 	// Exercise 3.2
@@ -327,13 +343,20 @@ public class Steganography {
 		// TODO (3.2): compare RGB values of pixel pairs using a nested for loop
 		/** not yet implemented **/
 
-
-
-
-
-
-
-
+		for(int i = 0; i <pixels1.length; i++) {
+			for(int j = 0; j < pixels1[i].length; j++) {
+				int r = pixels1[i][j].getRed();
+				int r2 = pixels2[i][j].getRed();
+				int g = pixels1[i][j].getGreen();
+				int g2 = pixels2[i][j].getGreen();
+				int b = pixels1[i][j].getBlue();
+				int b2 = pixels2[i][j].getBlue();
+				
+				if (!((r == r2) && (g == g2) && (b == b2))) {
+					return false;
+				}
+			}
+		}
 
 		return true;
 	}
@@ -360,14 +383,21 @@ public class Steganography {
 		// compare RGB values of pixel pairs using a nested for loop
 		// TODO create an ArrayList of points where RGB values differ between pixels
 		/** not yet implemented **/
-
-
-
-
-
-
-
-
+		
+		for(int i = 0; i <pixels.length; i++) {
+			for(int j = 0; j < pixels[i].length; j++) {
+				int r = pixels[i][j].getRed();
+				int r2 = otherPixels[i][j].getRed();
+				int g = pixels[i][j].getGreen();
+				int g2 = otherPixels[i][j].getGreen();
+				int b = pixels[i][j].getBlue();
+				int b2 = otherPixels[i][j].getBlue();
+				
+				if (!((r == r2) && (g == g2) && (b == b2))) {
+					list.add(new Point(i,j));
+				}
+			}
+		}
 
 
 		return list;
@@ -401,7 +431,20 @@ public class Steganography {
 		maxCol = points.get(0).getCol();
 		// TODO loop over the points in the list and find the bounding box 
 		/** not yet implemented **/
-
+		for (Point point: points) {
+			if (point.getCol() < minCol) {
+				minCol = point.getCol();
+			}
+			if (point.getCol() > maxCol) {
+				maxCol = point.getCol();
+			}
+			if (point.getRow() < minCol) {
+				minRow = point.getRow();
+			}
+			if (point.getRow() > maxCol) {
+				minRow = point.getRow();
+			}
+		}
 
 
 
@@ -418,7 +461,21 @@ public class Steganography {
 		// if on the border, set the color to Color.red;
 		// if inside the rectangle, compute the greyscale for the original pixel and set the color to that.
 		/** not yet implemented **/
-
+		
+		for (int r = minRow; r <= maxRow; r++) {
+			for (int c = minCol; c <= maxCol; c++) {
+				if(((r == minRow) ||(r == maxRow)) || ((c == minCol) || (c == maxCol))) {
+					pixels[r][c].setColor(Color.RED);
+				}
+				else {
+					int red = pixels[r][c].getRed();
+					int green = pixels[r][c].getGreen();
+					int blue = pixels[r][c].getBlue();
+					int grey = (red+green+blue)/3;
+					pixels[r][c].setColor(new Colour(grey,grey,grey));
+				}
+			}
+		}
 
 		// return the copy
 		return copy;
