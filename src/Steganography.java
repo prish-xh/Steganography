@@ -266,22 +266,24 @@ public class Steganography {
 	public static boolean canHide(Picture source, Picture secret, int row, int col) {
 		// TODO (3.0): determine whether secret can be hidden in source at [row][col]
 		/** not yet implemented **/
-		Picture hidden = new Picture(source);
-		Pixel[][] hPixels = hidden.getPixels2D();
+		Pixel[][] hPixels = source.getPixels2D();
 		Pixel[][] sPixels = secret.getPixels2D();
+		boolean ret = false;
 		
-		for(int i = 0; i<hPixels.length; i++) {
-			for (int j = 0; j < hPixels[0].length; i++) {
-				
-				if(sPixels[i][j] <= hPixels[row][col]);
+		if (sPixels.length + row < hPixels.length) {
+			if(sPixels[0].length + col < hPixels[0].length) {
+				ret = true;
 			}
 		}
+		if ((row <0)|| (col <0)) {
+			ret = false;
+		}
+		System.out.println(ret);
+		return ret;
+		}
 		
-		
-		
-		
-		
-	}
+
+	
 
 	// Exercise 3.1
 	// creates a new Picture with data from secret hidden in the RGB
@@ -438,12 +440,16 @@ public class Steganography {
 			if (point.getCol() > maxCol) {
 				maxCol = point.getCol();
 			}
-			if (point.getRow() < minCol) {
+			if (point.getRow() < minRow) {
 				minRow = point.getRow();
 			}
-			if (point.getRow() > maxCol) {
-				minRow = point.getRow();
+			
+			
+			if (point.getRow() > maxRow) {
+				maxRow = point.getRow();
 			}
+			
+			
 		}
 
 
@@ -472,7 +478,7 @@ public class Steganography {
 					int green = pixels[r][c].getGreen();
 					int blue = pixels[r][c].getBlue();
 					int grey = (red+green+blue)/3;
-					pixels[r][c].setColor(new Colour(grey,grey,grey));
+					pixels[r][c].setColor(new Color(grey,grey,grey));
 				}
 			}
 		}
@@ -605,6 +611,23 @@ public class Steganography {
 		// return the copy
 		// Since the pixels that you modified are referenced from 
 		// the copy, the copy contains the hidden text.
+		for (int i = 0; i <list.size(); i++) {
+			if(i >= pixels.length) {
+				break;
+			}
+			else {
+				clearLow(pixels[i]);
+				int red = pixels[i].getRed();
+				int green = pixels[i].getGreen();
+				int blue = pixels[i].getBlue();
+				
+				int[] bitsToStore = getBitPairs(list.get(i));
+				
+				pixels[i].setRed(bitsToStore[0] + red);
+				pixels[i].setGreen(bitsToStore[1] + green);
+				pixels[i].setBlue(bitsToStore[2] + blue);
+				}
+		}
 		return copy;
 	}
 
@@ -624,33 +647,34 @@ public class Steganography {
 
 		// Traverse the 1D array
 		// for every pixel in the 1D Array
-		//    Create a 1D array of integers to hold color components
-		int[] bitPairs = new int[3];
-		//    get each color component's (Red, Green, Blue).
-
-		//    get each color component's lower 2 bits
-		//       The lower 2 bits can be obtained using % 4
-
-		//    add each color component to bitPairs
-		//      bitPairs[0] is red
-
-		//      bitPairs[1] is green
-
-		//      bitPairs[2] is blue
-
-		//    Create a number that can be decoded with decodeString
-		int number = getNumberFromBitPairs(bitPairs);
-		// if number is 0, we are done, so break
-
-		// else 
-		//Add number to list
-
-		// Call decodeString to decode our array of integers
-		// to obtain the hidden string.
-		// return the revealed text
-		return decodeString(list);
+		for (int i = 0; i <pixels.length; i++) {
+			int[] bits = new int[3];
+			int red = pixels[i].getRed();
+			int green = pixels[i].getGreen();
+			int blue = pixels[i].getBlue();
+			
+			int truR = red % 4;
+			int truG = green % 4;
+			int truB = blue % 4;
+			
+			bits[0] += truR;
+			bits[1] += truG;
+			bits[2] += truB;
+			
+			int num = getNumberFromBitPairs(bits);
+			if (num == 0) {
+				break;
+			}
+			else {
+				list.add(num);
+			}
+		}
+			String decoded = decodeString(list);
+			return decoded;
+		
+			
 	}
-
+		
 	////////////////////////////////////////////////////////////////////
 	//
 	// main() method
@@ -664,6 +688,7 @@ public class Steganography {
 	// please refer to the Lab student guide for more information.
 	//
 	public static void main(String[] args) {
+		
 
 		////////////////////////////////////////////////////
 		// ACTIVITY 1: Exploring Color
